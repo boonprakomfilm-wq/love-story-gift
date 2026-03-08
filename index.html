@@ -23,10 +23,6 @@
             border-color: #ff69b4;
             border-radius: 25px;
         }
-        .btn-primary:hover {
-            background-color: #ff1493;
-            border-color: #ff1493;
-        }
         .container {
             max-width: 1200px;
             margin: auto;
@@ -39,17 +35,15 @@
         <h1 class="text-center">💖 LoveStory Gift</h1>
         <h3 class="text-center mb-4">ของขวัญแทนใจ ให้คนพิเศษ</h3>
         
-        <!-- แสดงรายการสินค้า -->
         <div class="row" id="product-list"></div>
     </div>
 
     <script>
-        // เก็บ URL ของ Google Apps Script (เปลี่ยนเป็นของตัวเอง)
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxNCOjb44vqGGvgSv_nmd3JrN9K_QjmSRBNyfhQaduByHYht52xCkFdHdlK6itYGqee/exec'; // <<< เปลี่ยนตรงนี้
+        // ใส่ URL จาก Google Apps Script ตรงนี้
+        const API_URL = 'https://script.google.com/macros/s/อันนี้ใส่URLจริง/exec';
 
         const productList = document.getElementById('product-list');
 
-        // โหลดข้อมูลสินค้า
         async function loadProducts() {
             try {
                 const response = await fetch(`${API_URL}?path=getProducts`);
@@ -87,11 +81,7 @@
             }
         }
 
-        // เรียกใช้ฟังก์ชันเมื่อโหลดหน้า
         loadProducts();
     </script>
 </body>
 </html>
-
-
-
