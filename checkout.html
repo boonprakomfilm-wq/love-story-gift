@@ -17,9 +17,6 @@
             border-color: #ff69b4;
             border-radius: 25px;
         }
-        .form-control {
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -45,17 +42,18 @@
     </div>
 
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxNCOjb44vqGGvgSv_nmd3JrN9K_QjmSRBNyfhQaduByHYht52xCkFdHdlK6itYGqee/exec'; // <<< เปลี่ยนตรงนี้
+        // ใส่ URL จาก Google Apps Script ตรงนี้
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxNCOjb44vqGGvgSv_nmd3JrN9K_QjmSRBNyfhQaduByHYht52xCkFdHdlK6itYGqee/exec';
 
         const temp = JSON.parse(sessionStorage.getItem('tempOrder'));
-        if (!temp) window.location.href = '/';
+        if (!temp) {
+            window.location.href = '/';
+        }
         
         document.getElementById('total-price').innerText = temp.totalPrice;
 
-        // สร้าง QR Code ตัวอย่าง
         QRCode.toCanvas(document.getElementById('qrcode'), 'PromptPay QR (ตัวอย่าง)', { width: 200 });
 
-        // เมื่อกดยืนยันคำสั่งซื้อ
         document.getElementById('checkout-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -63,6 +61,7 @@
             const customerLine = document.getElementById('customerLine').value;
 
             const orderData = {
+                path: 'createOrder',
                 productId: temp.productId,
                 customerName,
                 customerLine,
@@ -74,27 +73,20 @@
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // จำเป็นสำหรับ Google Apps Script
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        path: 'createOrder',
-                        ...orderData
-                    })
+                    body: JSON.stringify(orderData)
                 });
 
-                // เนื่องจากใช้ no-cors จะอ่าน response ไม่ได้ เราถือว่าสำเร็จ
                 sessionStorage.clear();
                 window.location.href = 'success.html';
                 
             } catch (error) {
-                alert('เกิดข้อผิดพลาดในการบันทึกออเดอร์: ' + error.message);
+                alert('เกิดข้อผิดพลาด: ' + error.message);
             }
         });
     </script>
 </body>
 </html>
-
-
-
