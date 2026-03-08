@@ -1,6 +1,13 @@
-/* Google Fonts */
+/* ==========================================
+   LoveStory Gift - สไตล์ Luxe Minimal
+   โทนสี: Old Rose (#B76E79), ครีม (#FDF5E6), น้ำตาลอ่อน (#D2B48C)
+   ฟอนต์: Sarabun (บาง, เรียบ)
+   ========================================== */
+
+/* ฟอนต์หลักจาก Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500&display=swap');
 
+/* รีเซ็ตพื้นฐาน */
 * {
     margin: 0;
     padding: 0;
@@ -9,66 +16,99 @@
 
 body {
     font-family: 'Sarabun', sans-serif;
-    background-color: #FDF5E6; /* ครีมอ่อน */
-    color: #5a4e4a;
-    line-height: 1.6;
+    font-weight: 300;               /* บาง สบายตา */
+    background-color: #FDF5E6;       /* ครีมอ่อน */
+    color: #5a4e4a;                  /* สีข้อความหลัก น้ำตาลเข้มอ่อน */
+    line-height: 1.7;
     padding: 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* คอนเทนเนอร์หลัก ให้โปร่ง กว้างไม่เกิน 1200px */
 .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* หัวข้อ */
+/* ===== หัวข้อ ===== */
 h1, h2, h3 {
-    font-weight: 300;
+    font-weight: 300;                /* บาง สงบ */
     letter-spacing: 1px;
-    color: #B76E79; /* old rose */
-    margin-bottom: 1rem;
+    color: #B76E79;                  /* old rose */
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     text-align: center;
+    margin-top: 1rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* เส้นใต้หัวข้อบางๆ */
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: #D2B48C;             /* น้ำตาลอ่อน */
+    margin: 0.8rem auto 0;
+    opacity: 0.4;
 }
 
 h2 {
-    font-size: 2rem;
-    border-bottom: 1px solid rgba(183, 110, 121, 0.2);
+    font-size: 2.2rem;
+    border-bottom: 1px solid rgba(210, 180, 140, 0.2);
     padding-bottom: 0.5rem;
 }
 
-/* การ์ด */
+h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+}
+
+/* ===== การ์ด (สินค้า / รายละเอียด) ===== */
 .card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(2px);
-    border-radius: 24px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-    padding: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(210, 180, 140, 0.2); /* น้ำตาลอ่อนบางๆ */
+    background: rgba(255, 255, 255, 0.7);  /* โปร่งแสง */
+    backdrop-filter: blur(2px);            /* เอฟเฟกต์ฝ้า */
+    border-radius: 24px;                   /* ขอบมน */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    padding: 1.8rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(210, 180, 140, 0.15);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(183, 110, 121, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(183, 110, 121, 0.08);
+    border-color: rgba(183, 110, 121, 0.2);
 }
 
 .card-img-top {
     width: 100%;
     height: 220px;
     object-fit: cover;
-    border-radius: 16px;
-    margin-bottom: 1rem;
+    border-radius: 16px;                   /* มนรับกับการ์ด */
+    margin-bottom: 1.2rem;
+    background: #f0e5db;
 }
 
-/* ปุ่ม */
+/* ===== ปุ่ม ===== */
 .btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
+    padding: 0.8rem 2.2rem;
+    border-radius: 50px;                   /* เม็ดยา */
     font-weight: 400;
     text-decoration: none;
     transition: all 0.3s;
@@ -76,70 +116,80 @@ h2 {
     cursor: pointer;
     font-size: 1rem;
     letter-spacing: 0.5px;
+    background: transparent;
+    line-height: 1.2;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .btn-primary {
-    background-color: #B76E79;
+    background-color: #B76E79;              /* old rose */
     color: white;
-    box-shadow: 0 4px 10px rgba(183, 110, 121, 0.2);
+    box-shadow: 0 4px 12px rgba(183, 110, 121, 0.2);
 }
 
 .btn-primary:hover {
     background-color: #a25d67;
-    box-shadow: 0 6px 15px rgba(183, 110, 121, 0.3);
+    box-shadow: 0 8px 18px rgba(183, 110, 121, 0.3);
+    transform: scale(1.02);
 }
 
 .btn-success {
-    background-color: #D2B48C;
+    background-color: #D2B48C;              /* น้ำตาลอ่อน */
     color: #4a3b32;
 }
 
 .btn-success:hover {
     background-color: #c1a17b;
+    box-shadow: 0 8px 18px rgba(210, 180, 140, 0.3);
 }
 
-/* ฟอร์ม */
+/* ===== ฟอร์ม ===== */
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .form-label {
     display: block;
     font-weight: 300;
     color: #B76E79;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    letter-spacing: 0.3px;
 }
 
 .form-control {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1.2rem;
     border: 1px solid rgba(210, 180, 140, 0.3);
-    border-radius: 16px;
-    background: rgba(255,255,255,0.8);
+    border-radius: 18px;                     /* มนรับกับ card */
+    background: rgba(255, 255, 255, 0.7);
     font-family: 'Sarabun', sans-serif;
     font-weight: 300;
-    transition: border 0.3s;
+    font-size: 1rem;
+    transition: all 0.3s;
+    color: #4e3e37;
 }
 
 .form-control:focus {
     outline: none;
     border-color: #B76E79;
-    box-shadow: 0 0 0 3px rgba(183, 110, 121, 0.1);
+    box-shadow: 0 0 0 4px rgba(183, 110, 121, 0.1);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 textarea.form-control {
-    min-height: 100px;
+    min-height: 120px;
     resize: vertical;
 }
 
-/* Color picker ปรับให้สวย */
+/* input type color ปรับให้สวย */
 input[type="color"] {
-    width: 60px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    border-radius: 12px;
+    width: 70px;
+    height: 50px;
+    padding: 0.3rem;
+    border: 1px solid rgba(210, 180, 140, 0.4);
+    border-radius: 14px;
     cursor: pointer;
     background: transparent;
 }
@@ -147,6 +197,7 @@ input[type="color"] {
 input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
 }
+
 input[type="color"]::-webkit-color-swatch {
     border: 2px solid rgba(210, 180, 140, 0.5);
     border-radius: 12px;
@@ -154,20 +205,22 @@ input[type="color"]::-webkit-color-swatch {
 
 /* ราคา */
 .price-tag {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 300;
     color: #B76E79;
     margin: 1rem 0;
+    line-height: 1;
 }
 
-/* QR Code */
+/* QR Code container */
 .qrcode-container {
     background: white;
-    padding: 1rem;
-    border-radius: 20px;
+    padding: 1.2rem;
+    border-radius: 24px;
     display: inline-block;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
     margin: 1rem 0;
+    border: 1px solid rgba(210, 180, 140, 0.2);
 }
 
 /* รายการสินค้า (grid) */
@@ -175,7 +228,7 @@ input[type="color"]::-webkit-color-swatch {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    margin-top: 2rem;
+    margin: 2.5rem 0;
 }
 
 .col-md-4 {
@@ -183,32 +236,134 @@ input[type="color"]::-webkit-color-swatch {
     min-width: 280px;
 }
 
-/* ส่วนแสดงรายละเอียดสินค้า */
+/* รายละเอียดสินค้า (product detail) */
 .product-detail {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 24px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
     border: 1px solid rgba(210, 180, 140, 0.2);
+    backdrop-filter: blur(1px);
 }
 
-/* ข้อความช่วยเหลือ */
+/* ข้อความช่วยเหลือเล็ก */
 .text-muted {
     color: #B76E79;
     opacity: 0.6;
     font-size: 0.9rem;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
+    font-weight: 300;
 }
 
-/* การจัดตำแหน่ง */
+/* จัดกลาง */
 .text-center {
     text-align: center;
 }
 
+/* ระยะห่าง */
 .mt-4 {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 .mb-4 {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ===== Responsive สำหรับมือถือ ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 1.5rem 0.8rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .col-md-4 {
+        flex: 1 1 100%;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.8rem;
+    }
+
+    .price-tag {
+        font-size: 1.8rem;
+    }
+
+    .product-detail {
+        padding: 1.2rem;
+    }
+}
+
+/* ===== ส่วนเสริมเพิ่มความมินิมอล ===== */
+hr {
+    border: none;
+    border-top: 1px solid rgba(210, 180, 140, 0.2);
+    margin: 2rem 0;
+}
+
+/* ลิงก์ */
+a {
+    color: #B76E79;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    font-weight: 400;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* ตาราง (ถ้ามี) */
+.table {
+    width: 100%;
+    background: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table th {
+    background: #B76E79;
+    color: white;
+    font-weight: 400;
+    padding: 1rem;
+    text-align: left;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(210,180,140,0.1);
+}
+
+/* แถบ底色สำหรับ hover */
+.table tbody tr:hover {
+    background: rgba(183,110,121,0.03);
+}
+
+/* ===== สุดท้าย: การแสดงผลข้อความสถานะ ===== */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(210,180,140,0.3);
+    color: #4e3e37;
+    margin: 1rem 0;
+    backdrop-filter: blur(2px);
+}
+
+.alert-danger {
+    border-color: #B76E79;
+    color: #B76E79;
 }
