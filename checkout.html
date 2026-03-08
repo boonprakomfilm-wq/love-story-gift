@@ -4,59 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ชำระเงิน - LoveStory Gift</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
-    <style>
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #fff0f5;
-            padding: 20px;
-        }
-        .btn-primary {
-            background-color: #ff69b4;
-            border-color: #ff69b4;
-            border-radius: 25px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <h2>💳 กรอกข้อมูลและชำระเงิน</h2>
+        <h2>💳 ข้อมูลผู้ส่งและชำระเงิน</h2>
         <form id="checkout-form">
-            <div class="mb-3">
+            <div class="form-group">
                 <label class="form-label">ชื่อเล่นของคุณ *</label>
-                <input type="text" class="form-control" id="customerName" required>
+                <input type="text" class="form-control" id="customerName" required placeholder="เช่น มายด์">
             </div>
-            <div class="mb-3">
-                <label class="form-label">LINE ID (สำหรับติดต่อ) *</label>
-                <input type="text" class="form-control" id="customerLine" required>
+            <div class="form-group">
+                <label class="form-label">LINE ID (สำหรับรับงาน) *</label>
+                <input type="text" class="form-control" id="customerLine" required placeholder="LINE ID ของคุณ">
             </div>
-            <p class="fw-bold">รวมราคา: <span id="total-price"></span> บาท</p>
-            <div class="mb-3">
-                <label>ชำระผ่าน PromptPay</label>
-                <div id="qrcode"></div>
-                <p class="text-muted">สแกน QR เพื่อโอนเงิน (ตัวอย่าง QR)</p>
+            <div class="form-group">
+                <label class="form-label">โค้ดส่วนลด (ถ้ามี)</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" class="form-control" id="discountCode" placeholder="กรอกโค้ดส่วนลด">
+                    <button type="button" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">ใช้โค้ด</button>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">ยืนยันคำสั่งซื้อ</button>
+            <p class="price-tag" id="total-price"></p>
+
+            <div class="form-group">
+                <label class="form-label">ชำระผ่าน PromptPay</label>
+                <div class="qrcode-container" id="qrcode"></div>
+                <p class="text-muted">สแกน QR เพื่อโอนเงิน</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ส่งงานและชำระเงิน</button>
         </form>
     </div>
 
     <script>
-        // ใส่ URL จาก Google Apps Script ตรงนี้
         const API_URL = 'https://script.google.com/macros/s/AKfycbxNCOjb44vqGGvgSv_nmd3JrN9K_QjmSRBNyfhQaduByHYht52xCkFdHdlK6itYGqee/exec';
-
         const temp = JSON.parse(sessionStorage.getItem('tempOrder'));
+
         if (!temp) {
             window.location.href = '/';
         }
-        
-        document.getElementById('total-price').innerText = temp.totalPrice;
 
-        QRCode.toCanvas(document.getElementById('qrcode'), 'PromptPay QR (ตัวอย่าง)', { width: 200 });
+        document.getElementById('total-price').innerText = `${temp.totalPrice} บาท`;
+
+        // สร้าง QR ตัวอย่าง (สามารถเปลี่ยนเป็น QR จริงได้)
+        QRCode.toCanvas(document.getElementById('qrcode'), `PromptPay-${temp.totalPrice}`, { width: 200 });
 
         document.getElementById('checkout-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const customerName = document.getElementById('customerName').value;
             const customerLine = document.getElementById('customerLine').value;
 
@@ -71,18 +68,14 @@
             };
 
             try {
-                const response = await fetch(API_URL, {
+                await fetch(API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 });
-
                 sessionStorage.clear();
                 window.location.href = 'success.html';
-                
             } catch (error) {
                 alert('เกิดข้อผิดพลาด: ' + error.message);
             }
