@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงิน - LoveStory Gift</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #fff0f5;
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #ff69b4;
+            border-color: #ff69b4;
+            border-radius: 25px;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>💳 กรอกข้อมูลและชำระเงิน</h2>
+        <form id="checkout-form">
+            <div class="mb-3">
+                <label class="form-label">ชื่อเล่นของคุณ *</label>
+                <input type="text" class="form-control" id="customerName" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">LINE ID (สำหรับติดต่อ) *</label>
+                <input type="text" class="form-control" id="customerLine" required>
+            </div>
+            <p class="fw-bold">รวมราคา: <span id="total-price"></span> บาท</p>
+            <div class="mb-3">
+                <label>ชำระผ่าน PromptPay</label>
+                <div id="qrcode"></div>
+                <p class="text-muted">สแกน QR เพื่อโอนเงิน (ตัวอย่าง QR)</p>
+            </div>
+            <button type="submit" class="btn btn-primary">ยืนยันคำสั่งซื้อ</button>
+        </form>
+    </div>
+
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbz0GblmjUn-fV-zqequKIoh4zBdfIC65xNITD3hKLmS6ts3HbIgYt_WxCLbwWqNltZQ/execc'; // <<< เปลี่ยนตรงนี้
+
+        const temp = JSON.parse(sessionStorage.getItem('tempOrder'));
+        if (!temp) window.location.href = '/';
+        
+        document.getElementById('total-price').innerText = temp.totalPrice;
+
+        // สร้าง QR Code ตัวอย่าง
+        QRCode.toCanvas(document.getElementById('qrcode'), 'PromptPay QR (ตัวอย่าง)', { width: 200 });
+
+        // เมื่อกดยืนยันคำสั่งซื้อ
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const customerName = document.getElementById('customerName').value;
+            const customerLine = document.getElementById('customerLine').value;
+
+            const orderData = {
+                productId: temp.productId,
+                customerName,
+                customerLine,
+                customData: temp.customData,
+                totalPrice: temp.totalPrice,
+                status: 'pending'
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // จำเป็นสำหรับ Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        path: 'createOrder',
+                        ...orderData
+                    })
+                });
+
+                // เนื่องจากใช้ no-cors จะอ่าน response ไม่ได้ เราถือว่าสำเร็จ
+                sessionStorage.clear();
+                window.location.href = 'success.html';
+                
+            } catch (error) {
+                alert('เกิดข้อผิดพลาดในการบันทึกออเดอร์: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
