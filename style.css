@@ -1,0 +1,214 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #FDF5E6; /* ครีมอ่อน */
+    color: #5a4e4a;
+    line-height: 1.6;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* หัวข้อ */
+h1, h2, h3 {
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #B76E79; /* old rose */
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid rgba(183, 110, 121, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+/* การ์ด */
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(2px);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(210, 180, 140, 0.2); /* น้ำตาลอ่อนบางๆ */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(183, 110, 121, 0.1);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}
+
+/* ปุ่ม */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: #B76E79;
+    color: white;
+    box-shadow: 0 4px 10px rgba(183, 110, 121, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #a25d67;
+    box-shadow: 0 6px 15px rgba(183, 110, 121, 0.3);
+}
+
+.btn-success {
+    background-color: #D2B48C;
+    color: #4a3b32;
+}
+
+.btn-success:hover {
+    background-color: #c1a17b;
+}
+
+/* ฟอร์ม */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 300;
+    color: #B76E79;
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(210, 180, 140, 0.3);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.8);
+    font-family: 'Sarabun', sans-serif;
+    font-weight: 300;
+    transition: border 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #B76E79;
+    box-shadow: 0 0 0 3px rgba(183, 110, 121, 0.1);
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Color picker ปรับให้สวย */
+input[type="color"] {
+    width: 60px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid rgba(210, 180, 140, 0.5);
+    border-radius: 12px;
+}
+
+/* ราคา */
+.price-tag {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #B76E79;
+    margin: 1rem 0;
+}
+
+/* QR Code */
+.qrcode-container {
+    background: white;
+    padding: 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin: 1rem 0;
+}
+
+/* รายการสินค้า (grid) */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.col-md-4 {
+    flex: 1 1 calc(33.333% - 2rem);
+    min-width: 280px;
+}
+
+/* ส่วนแสดงรายละเอียดสินค้า */
+.product-detail {
+    background: rgba(255,255,255,0.5);
+    border-radius: 24px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(210, 180, 140, 0.2);
+}
+
+/* ข้อความช่วยเหลือ */
+.text-muted {
+    color: #B76E79;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+/* การจัดตำแหน่ง */
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.mb-4 {
+    margin-bottom: 2rem;
+}
